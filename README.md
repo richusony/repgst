@@ -1,159 +1,512 @@
-# Turborepo starter
+# RepGST
 
-This Turborepo starter is maintained by the Turborepo core team.
+<div align="center">
 
-## Using this example
+![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
+![Express](https://img.shields.io/badge/Express.js-5-black?style=for-the-badge&logo=express)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue?style=for-the-badge&logo=postgresql)
+![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?style=for-the-badge&logo=prisma)
+![TurboRepo](https://img.shields.io/badge/Turborepo-Monorepo-EF4444?style=for-the-badge&logo=turborepo)
+![Bun](https://img.shields.io/badge/Bun-Package_Manager-F9F1E1?style=for-the-badge&logo=bun)
 
-Run the following command:
+**Modern GST Compliance Platform**
 
-```sh
-npx create-turbo@latest
+Enterprise-grade GST management platform inspired by EY DigiGST, built with Next.js, Express.js, PostgreSQL, and Turborepo.
+
+</div>
+
+---
+
+## Overview
+
+RepGST is a modern SaaS platform designed to simplify GST compliance for businesses.
+
+It enables organizations to:
+
+- Manage customers and suppliers
+- Create sales and purchase invoices
+- Calculate GST automatically
+- Track Input Tax Credit (ITC)
+- Generate GST return summaries
+- Support multiple companies
+- Manage users with role-based access
+- Maintain audit logs and activity tracking
+
+The project is inspired by enterprise products like:
+
+- EY DigiGST
+- Zoho Books
+- Tally Prime
+- ERPNext
+- FreshBooks
+
+---
+
+# Architecture
+
+```text
+┌────────────────────────────┐
+│        Next.js App         │
+│      Marketing + App       │
+└─────────────┬──────────────┘
+              │
+              ▼
+┌────────────────────────────┐
+│       Express.js API       │
+│         TypeScript         │
+└─────────────┬──────────────┘
+              │
+      ┌───────┴────────┐
+      ▼                ▼
+ PostgreSQL           Redis
+      │
+      ▼
+    Prisma
 ```
 
-## What's inside?
+---
 
-This Turborepo includes the following packages/apps:
+# Tech Stack
 
-### Apps and Packages
+## Frontend
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- Next.js 15
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Lucide React
+- Zustand
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## Backend
 
-### Utilities
+- Express.js
+- TypeScript
+- Prisma ORM
+- PostgreSQL
+- Redis
 
-This Turborepo has some additional tools already setup for you:
+## DevOps
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- Docker
+- Turborepo
+- Bun
+- Cloudflare
+- Traefik
+- Azure VM
 
-### Build
+---
 
-To build all apps and packages, run the following command:
+# Monorepo Structure
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo build
+```text
+repgst
+│
+├── apps
+│   │
+│   ├── web
+│   │     Next.js frontend
+│   │
+│   └── api
+│         Express backend
+│
+├── packages
+│   │
+│   ├── eslint-config
+│   ├── typescript-config
+│   ├── shared
+│   └── constants
+│
+├── .github
+├── turbo.json
+├── bun.lock
+├── package.json
+└── README.md
 ```
 
-Without global `turbo`, use your package manager:
+---
 
-```sh
-cd my-turborepo
-npx turbo build
-bun dlx turbo build
-bun exec turbo build
+# Features
+
+## Authentication
+
+- Email and password login
+- JWT authentication
+- Refresh token mechanism
+- Protected routes
+
+---
+
+## Multi-tenancy
+
+Every company has isolated data.
+
+Supports:
+
+- Multiple organizations
+- Separate users
+- Separate invoices
+- Independent subscriptions
+
+---
+
+## Role-Based Access Control
+
+### Super Admin
+
+- Manage companies
+- Manage plans
+- View platform analytics
+
+### Company Admin
+
+- Manage company settings
+- Invite users
+- Manage invoices
+
+### Accountant
+
+- Create invoices
+- Manage customers
+- Manage suppliers
+
+### Auditor
+
+- Read-only access
+
+### Viewer
+
+- Dashboard access
+
+---
+
+## Master Management
+
+### Parties
+
+Supports:
+
+- Customer
+- Supplier
+- Both
+
+### Items
+
+Supports:
+
+- Products
+- Services
+
+---
+
+## Invoice Management
+
+### Sales Invoices
+
+- Create invoices
+- Tax calculations
+- PDF generation
+
+### Purchase Invoices
+
+- Track expenses
+- ITC calculations
+
+---
+
+## GST Calculations
+
+Supports:
+
+### CGST
+
+Central GST
+
+### SGST
+
+State GST
+
+### IGST
+
+Inter-state GST
+
+Automatic tax determination based on state.
+
+---
+
+## GST Returns
+
+Supports:
+
+- GSTR-1
+- GSTR-3B
+
+Features:
+
+- Monthly summaries
+- Output tax calculation
+- Input tax credit calculation
+- Net tax payable
+
+---
+
+## Subscription Management
+
+Plans:
+
+### Starter
+
+- 1 Company
+- 5 Users
+- 1000 invoices/month
+
+### Growth
+
+- 5 Companies
+- 25 Users
+- 10000 invoices/month
+
+### Enterprise
+
+- Unlimited
+- Dedicated support
+- Custom integrations
+
+---
+
+## Audit Logs
+
+Track:
+
+- Invoice creation
+- User activity
+- Updates
+- Deletions
+
+---
+
+# Database
+
+Core tables:
+
+```text
+users
+roles
+company_users
+
+companies
+
+plans
+subscriptions
+
+parties
+items
+
+invoices
+invoice_items
+
+gst_returns
+
+payments
+
+activity_logs
+notifications
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+---
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+# Pages
 
-```sh
-turbo build --filter=docs
+### Public
+
+- Landing Page
+- Pricing Page
+- Login
+- Register
+
+### Super Admin
+
+- Dashboard
+- Companies
+- Plans
+- Payments
+
+### Company Portal
+
+- Dashboard
+- Users
+- Parties
+- Items
+- Invoices
+- GST Dashboard
+- Returns
+- Billing
+- Activity Logs
+
+---
+
+# Getting Started
+
+## Prerequisites
+
+- Bun >= 1.x
+- PostgreSQL >= 17
+- Node.js >= 22
+
+---
+
+## Clone
+
+```bash
+git clone https://github.com/yourusername/repgst.git
+
+cd repgst
 ```
 
-Without global `turbo`:
+---
 
-```sh
-npx turbo build --filter=docs
-bun exec turbo build --filter=docs
-bun exec turbo build --filter=docs
+## Install Dependencies
+
+```bash
+bun install
 ```
 
-### Develop
+---
 
-To develop all apps and packages, run the following command:
+## Environment Variables
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+### apps/api/.env
 
-```sh
-cd my-turborepo
-turbo dev
+```env
+PORT=8080
+
+DATABASE_URL=
+
+JWT_ACCESS_SECRET=
+JWT_REFRESH_SECRET=
+
+REDIS_URL=
 ```
 
-Without global `turbo`, use your package manager:
+### apps/web/.env.local
 
-```sh
-cd my-turborepo
-npx turbo dev
-bun exec turbo dev
-bun exec turbo dev
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8080
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+---
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+## Database
 
-```sh
-turbo dev --filter=web
+Generate Prisma client
+
+```bash
+bun run db:generate
 ```
 
-Without global `turbo`:
+Run migrations
 
-```sh
-npx turbo dev --filter=web
-bun exec turbo dev --filter=web
-bun exec turbo dev --filter=web
+```bash
+bun run db:migrate
 ```
 
-### Remote Caching
+Seed database
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
+```bash
+bun run db:seed
 ```
 
-Without global `turbo`, use your package manager:
+---
 
-```sh
-cd my-turborepo
-npx turbo login
-bun exec turbo login
-bun exec turbo login
+# Development
+
+Start all applications
+
+```bash
+bun dev
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+Run frontend
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
+```bash
+bun --filter web dev
 ```
 
-Without global `turbo`:
+Run backend
 
-```sh
-npx turbo link
-bun exec turbo link
-bun exec turbo link
+```bash
+bun --filter api dev
 ```
 
-## Useful Links
+---
 
-Learn more about the power of Turborepo:
+# Build
 
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+```bash
+bun run build
+```
+
+---
+
+# Lint
+
+```bash
+bun run lint
+```
+
+---
+
+# Format
+
+```bash
+bun run format
+```
+
+---
+
+# Roadmap
+
+## MVP
+
+- [x] Authentication
+- [x] Multi-tenancy
+- [x] RBAC
+- [x] Parties
+- [x] Items
+- [x] Invoices
+- [x] GST Dashboard
+- [x] GSTR Summary
+- [x] Audit Logs
+
+## V2
+
+- [ ] E-Invoicing
+- [ ] E-Way Bills
+- [ ] GSTN Integration
+- [ ] Reconciliation
+- [ ] PDF Reports
+- [ ] Email Notifications
+- [ ] File Uploads
+- [ ] Excel Import
+
+## V3
+
+- [ ] AI Assistant
+- [ ] ERP Integrations
+- [ ] Workflow Engine
+- [ ] Analytics
+- [ ] Mobile App
+
+---
+
+# License
+
+MIT License
+
+---
+
+<div align="center">
+
+Built with ❤️ using Next.js, Express.js, PostgreSQL and Bun.
+
+</div>
