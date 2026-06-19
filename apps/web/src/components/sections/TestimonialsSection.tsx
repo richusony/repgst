@@ -11,10 +11,10 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <MotionSection id="testimonials" className="bg-white py-20 sm:py-24">
+    <MotionSection className="bg-white py-20 sm:py-24">
       <Container>
         <MotionItem className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-cyan-600">Testimonials</p>
+          <p id="testimonials" className="text-sm font-bold uppercase tracking-[0.2em] text-cyan-600">Testimonials</p>
           <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-5xl">
             Trusted by teams that cannot afford compliance guesswork.
           </h2>

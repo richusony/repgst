@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   },
   description:
     "RepGST automates GST calculations, invoices, returns, audit logs, and compliance workflows for modern Indian businesses.",
-  metadataBase: new URL("https://repgst.com"),
+  metadataBase: new URL("https://repgst.vercel.app"),
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>{children}</body>
     </html>
   );

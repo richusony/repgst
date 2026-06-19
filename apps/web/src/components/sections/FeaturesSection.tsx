@@ -14,10 +14,10 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <MotionSection id="features" className="bg-slate-50 py-20 sm:py-24">
+    <MotionSection className="bg-slate-50 py-20 sm:py-24">
       <Container>
         <MotionItem className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-indigo-600">Features</p>
+          <p id="features" className="text-sm font-bold uppercase tracking-[0.2em] text-indigo-600">Features</p>
           <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-5xl">
             Everything your compliance team needs.
           </h2>
